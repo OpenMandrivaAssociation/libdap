@@ -1,12 +1,12 @@
 %define lib_major       0
-%define lib_name        %mklibname dap %{lib_major}
-%define lib_name_d      %mklibname dap %{lib_major} -d
-%define lib_name_d_s    %mklibname dap %{lib_major} -d -s
+%define lib_name        %{mklibname dap %{lib_major}}
+%define lib_name_d      %{mklibname dap %{lib_major} -d}
+%define lib_name_d_s    %{mklibname dap %{lib_major} -d -s}
 
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
 Version:        3.7.7
-Release:        %mkrel 3
+Release:        %mkrel 4
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
@@ -15,8 +15,8 @@ License:        LGPL
 Group:          System/Libraries
 BuildRequires:  doxygen
 BuildRequires:  graphviz
-BuildRequires:  libcurl-devel >= 7.10.6
-BuildRequires:  libxml2-devel >= 2.5.7
+BuildRequires:  libcurl-devel
+BuildRequires:  libxml2-devel
 BuildRequires:  pkgconfig
 # deflate depends directly on zlib
 BuildRequires:  zlib-devel
@@ -41,11 +41,9 @@ C++ DAP2 library from OPeNDAP.
 Summary:        Development and header files from libdap
 Group:          Development/C
 Provides:       %{name}-devel = %{epoch}:%{version}-%{release}
-Provides:       %{_lib}%{name}-devel = %{epoch}:%{version}-%{release}
-Provides:       lib%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:       %{lib_name} = %{epoch}:%{version}-%{release}
-Requires:       libcurl-devel >= 7.10.6
-Requires:       libxml2-devel >= 2.5.7
+Requires:       libcurl-devel
+Requires:       libxml2-devel
 Requires:       pkgconfig
 # for the /usr/share/aclocal directory ownership
 Requires:       automake
@@ -58,8 +56,6 @@ will use libdap.
 Summary:        Static development files from libdap
 Group:          Development/C
 Provides:       %{name}-static-devel = %{epoch}:%{version}-%{release}
-Provides:       %{_lib}%{name}-static-devel = %{epoch}:%{version}-%{release}
-Provides:       lib%{name}-static-devel = %{epoch}:%{version}-%{release}
 Requires:       %{lib_name_d} = %{epoch}:%{version}-%{release}
 
 %description -n %{lib_name_d_s}
