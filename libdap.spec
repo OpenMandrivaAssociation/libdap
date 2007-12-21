@@ -20,6 +20,7 @@ BuildRequires:  libxml2-devel
 BuildRequires:  pkgconfig
 # deflate depends directly on zlib
 BuildRequires:  zlib-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The libdap++ library contains an implementation of DAP2. This package
