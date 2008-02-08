@@ -1,12 +1,12 @@
 %define lib_major       0
 %define lib_name        %{mklibname dap %{lib_major}}
-%define lib_name_d      %{mklibname dap %{lib_major} -d}
-%define lib_name_d_s    %{mklibname dap %{lib_major} -d -s}
+%define lib_name_d      %{mklibname dap -d}
+%define lib_name_d_s    %{mklibname dap -d -s}
 
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
 Version:        3.7.7
-Release:        %mkrel 4
+Release:        %mkrel 5
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
@@ -40,13 +40,14 @@ C++ DAP2 library from OPeNDAP.
 %package -n %{lib_name_d}
 Summary:        Development and header files from libdap
 Group:          Development/C
-Provides:       %{name}-devel = %{epoch}:%{version}-%{release}
+Provides:       libdap-devel = %version
 Requires:       %{lib_name} = %{epoch}:%{version}-%{release}
 Requires:       libcurl-devel
 Requires:       libxml2-devel
 Requires:       pkgconfig
 # for the /usr/share/aclocal directory ownership
 Requires:       automake
+Obsoletes:	%{_lib}dap0-devel
 
 %description -n %{lib_name_d}
 This package contains all the files needed to develop applications that
@@ -57,6 +58,7 @@ Summary:        Static development files from libdap
 Group:          Development/C
 Provides:       %{name}-static-devel = %{epoch}:%{version}-%{release}
 Requires:       %{lib_name_d} = %{epoch}:%{version}-%{release}
+Obsoletes:	%{_lib}dap0-static-devel
 
 %description -n %{lib_name_d_s}
 This package contains all the files needed to develop applications that
