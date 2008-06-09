@@ -95,9 +95,13 @@ Documentation of the libdap library.
 %clean
 %{__rm} -rf %{buildroot}
 
+%if %mdkversion < 200900
 %post -n %{lib_name} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{lib_name} -p /sbin/ldconfig
+%endif
 
 %files
 %defattr(-,root,root,-)
