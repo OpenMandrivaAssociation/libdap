@@ -6,7 +6,7 @@
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
 Version:        3.7.7
-Release:        %mkrel 5
+Release:        %mkrel 7
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
