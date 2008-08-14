@@ -1,12 +1,14 @@
 %define lib_major       0
+%define client_major 	3
+%define server_major 	6
 %define lib_name        %{mklibname dap %{lib_major}}
 %define lib_name_d      %{mklibname dap -d}
 %define lib_name_d_s    %{mklibname dap -d -s}
 
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
-Version:        3.7.7
-Release:        %mkrel 7
+Version:        3.8.2
+Release:        %mkrel 1
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
@@ -75,7 +77,7 @@ Documentation of the libdap library.
 %setup -q
 
 %build
-%{configure2_5x} --disable-dependency-tracking
+%{configure2_5x} --disable-dependency-tracking --with-system-zlib
 %{make}
 
 %install
@@ -112,9 +114,12 @@ Documentation of the libdap library.
 
 %files -n %{lib_name}
 %defattr(-,root,root,-)
-%{_libdir}/libdap.so.*
-%{_libdir}/libdapclient.so.*
-%{_libdir}/libdapserver.so.*
+%{_libdir}/libdap.so.%{lib_major}
+%{_libdir}/libdap.so.%{lib_major}.*
+%{_libdir}/libdapclient.so.%{client_major}
+%{_libdir}/libdapclient.so.%{client_major}.*
+%{_libdir}/libdapserver.so.%{server_major}
+%{_libdir}/libdapserver.so.%{server_major}.*
 
 %files -n %{lib_name_d}
 %defattr(-,root,root,-)
