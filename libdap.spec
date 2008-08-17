@@ -12,11 +12,13 @@ Release:        %mkrel 1
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
+Patch0:         libdap-3.8.2-link.patch
 # The deflate program is covered by the W3C licence
-License:        LGPL
+License:        LGPL 2.1+
 Group:          System/Libraries
 BuildRequires:  doxygen
 BuildRequires:  graphviz
+BuildRequires:  cppunit-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  pkgconfig
@@ -75,6 +77,7 @@ Documentation of the libdap library.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{configure2_5x} --disable-dependency-tracking --with-system-zlib
