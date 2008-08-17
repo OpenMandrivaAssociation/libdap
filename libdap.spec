@@ -1,4 +1,4 @@
-%define lib_major       0
+%define lib_major       9
 %define client_major 	3
 %define server_major 	6
 %define lib_name        %{mklibname dap %{lib_major}}
@@ -130,8 +130,9 @@ Documentation of the libdap library.
 %{_libdir}/libdapclient.so
 %{_libdir}/libdapserver.so
 %{_libdir}/*.la
-#%{_libdir}/pkgconfig/libdap*.pc
+%{_libdir}/pkgconfig/libdap*.pc
 %{_bindir}/dap-config
+%{_bindir}/dap-config-pkgconfig
 %{_includedir}/libdap/
 %{_datadir}/aclocal/*
 
