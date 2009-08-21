@@ -8,7 +8,7 @@
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
 Version:        3.9.3
-Release:        %mkrel 1
+Release:        %mkrel 2
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
@@ -37,6 +37,7 @@ the library when it returns compressed responses.
 %package -n %{lib_name}
 Summary:        C++ DAP2 library from OPeNDAP
 Group:          System/Libraries
+Conflicts:	%{_lib}dap9 < 3.9.0
 
 %description -n %{lib_name}
 C++ DAP2 library from OPeNDAP.
