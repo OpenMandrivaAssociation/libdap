@@ -7,8 +7,8 @@
 
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
-Version:        3.9.3
-Release:        %mkrel 5
+Version:        3.11.3
+Release:	1
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
@@ -24,7 +24,7 @@ BuildRequires:  libxml2-devel
 BuildRequires:  pkgconfig
 # deflate depends directly on zlib
 BuildRequires:  zlib-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires:	pkgconfig(uuid)
 
 %description
 The libdap++ library contains an implementation of DAP2. This package
@@ -79,7 +79,7 @@ Documentation of the libdap library.
 
 %prep
 %setup -q
-%patch0 -p0
+#%patch0 -p0
 
 %build
 autoreconf -fiv
@@ -87,7 +87,6 @@ autoreconf -fiv
 %make
 
 %install
-%{__rm} -rf %{buildroot}
 %{makeinstall_std} INSTALL="%{__install} -p"
 
 %{make} docs
@@ -100,26 +99,13 @@ autoreconf -fiv
 # for all archs
 /bin/touch -r ChangeLog __mandriva_docs/html/*
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{lib_name} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{lib_name} -p /sbin/ldconfig
-%endif
-
 %files
-%defattr(-,root,root,-)
 %doc README NEWS COPYING COPYRIGHT_URI README.AIS README.dodsrc
 %doc COPYRIGHT_W3C
 %{_bindir}/getdap
 %{_sbindir}/deflate
 
 %files -n %{lib_name}
-%defattr(-,root,root,-)
 %{_libdir}/libdap.so.%{lib_major}
 %{_libdir}/libdap.so.%{lib_major}.*
 %{_libdir}/libdapclient.so.%{client_major}
@@ -128,11 +114,9 @@ autoreconf -fiv
 %{_libdir}/libdapserver.so.%{server_major}.*
 
 %files -n %{lib_name_d}
-%defattr(-,root,root,-)
 %{_libdir}/libdap.so
 %{_libdir}/libdapclient.so
 %{_libdir}/libdapserver.so
-%{_libdir}/*.la
 %{_libdir}/pkgconfig/libdap*.pc
 %{_bindir}/dap-config
 %{_bindir}/dap-config-pkgconfig
@@ -140,9 +124,7 @@ autoreconf -fiv
 %{_datadir}/aclocal/*
 
 %files -n %{lib_name_d_s}
-%defattr(-,root,root,-)
 %{_libdir}/*.a
 
 %files doc
-%defattr(-,root,root,-)
 %doc __mandriva_docs/html/
