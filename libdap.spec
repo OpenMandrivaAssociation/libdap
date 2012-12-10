@@ -7,12 +7,13 @@
 
 Name:           libdap
 Summary:        C++ DAP2 library from OPeNDAP
-Version:        3.11.3
-Release:	1
+Version:        3.9.3
+Release:        6
 Epoch:          0
 URL:            http://www.opendap.org/
 Source0:        http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
 Patch0:         libdap-3.9.2-gcc-4.4.patch
+Patch1:         libdap-3.9.3-curl.patch
 # The deflate program is covered by the W3C licence
 License:        LGPL 2.1+
 Group:          System/Libraries
@@ -24,7 +25,6 @@ BuildRequires:  libxml2-devel
 BuildRequires:  pkgconfig
 # deflate depends directly on zlib
 BuildRequires:  zlib-devel
-BuildRequires:	pkgconfig(uuid)
 
 %description
 The libdap++ library contains an implementation of DAP2. This package
@@ -79,7 +79,8 @@ Documentation of the libdap library.
 
 %prep
 %setup -q
-#%patch0 -p0
+%patch0 -p0
+%patch1 -p0
 
 %build
 autoreconf -fiv
@@ -92,7 +93,7 @@ autoreconf -fiv
 %{make} docs
 
 %{__rm} -rf __mandriva_docs
-%{__cp} -a docs __mandriva_docs
+cp -a docs __mandriva_docs
 # those .map and .md5 are of dubious use, remove them
 %{__rm} -f __mandriva_docs/html/*.map __mandriva_docs/html/*.md5
 # use the ChangeLog timestamp to have the same timestamps for the doc files 
@@ -100,12 +101,14 @@ autoreconf -fiv
 /bin/touch -r ChangeLog __mandriva_docs/html/*
 
 %files
+%defattr(-,root,root,-)
 %doc README NEWS COPYING COPYRIGHT_URI README.AIS README.dodsrc
 %doc COPYRIGHT_W3C
 %{_bindir}/getdap
 %{_sbindir}/deflate
 
 %files -n %{lib_name}
+%defattr(-,root,root,-)
 %{_libdir}/libdap.so.%{lib_major}
 %{_libdir}/libdap.so.%{lib_major}.*
 %{_libdir}/libdapclient.so.%{client_major}
@@ -114,6 +117,7 @@ autoreconf -fiv
 %{_libdir}/libdapserver.so.%{server_major}.*
 
 %files -n %{lib_name_d}
+%defattr(-,root,root,-)
 %{_libdir}/libdap.so
 %{_libdir}/libdapclient.so
 %{_libdir}/libdapserver.so
@@ -124,7 +128,79 @@ autoreconf -fiv
 %{_datadir}/aclocal/*
 
 %files -n %{lib_name_d_s}
+%defattr(-,root,root,-)
 %{_libdir}/*.a
 
 %files doc
+%defattr(-,root,root,-)
 %doc __mandriva_docs/html/
+
+
+%changelog
+* Fri Jan 07 2011 Thierry Vignaud <tv@mandriva.org> 0:3.9.3-5mdv2011.0
++ Revision: 629719
+- make doc subpackage noarch
+
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 0:3.9.3-4mdv2011.0
++ Revision: 620088
+- the mass rebuild of 2010.0 packages
+
+* Thu Oct 08 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 0:3.9.3-3mdv2010.0
++ Revision: 455885
+- rebuild for new curl SSL backend
+
+* Fri Aug 21 2009 Funda Wang <fwang@mandriva.org> 0:3.9.3-2mdv2010.0
++ Revision: 418900
+- conflict with old lib
+
+* Thu Aug 20 2009 Emmanuel Andry <eandry@mandriva.org> 0:3.9.3-1mdv2010.0
++ Revision: 418589
+- New version 3.9.3
+- drop P0
+- add patch to fix build with gcc44
+- use autoreconf
+- new majors
+
+* Sun Aug 17 2008 David Walluck <walluck@mandriva.org> 0:3.8.2-1mdv2009.0
++ Revision: 272861
+- fix build
+- add libdap-3.8.2-link.patch
+
+  + Emmanuel Andry <eandry@mandriva.org>
+    - New version
+    - protect majors
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Fri Feb 08 2008 Helio Chissini de Castro <helio@mandriva.com> 0:3.7.7-5mdv2008.1
++ Revision: 164049
+- Proper devel naming without soname
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Thu Oct 25 2007 David Walluck <walluck@mandriva.org> 0:3.7.7-4mdv2008.1
++ Revision: 101973
+- remove incorrect lib provides
+- remove versioned BuildRequires
+
+* Thu Jun 07 2007 Anssi Hannula <anssi@mandriva.org> 0:3.7.7-3mdv2008.0
++ Revision: 36182
+- rebuild with correct optflags
+
+  + David Walluck <walluck@mandriva.org>
+    - fix lib name
+    - fix Group
+    - Import libdap
+
+
+
+* Wed Jun 06 2007 David Walluck <walluck@mandriva.org> 0:3.7.7-1mdv2008.0
+- release

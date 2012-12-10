@@ -1,0 +1,10 @@
+--- HTTPConnect.h.orig	2012-10-17 11:27:46.603596954 +0400
++++ HTTPConnect.h	2012-10-17 11:27:49.723702565 +0400
+@@ -30,7 +30,6 @@
+ #include <string>
+ 
+ #include <curl/curl.h>
+-#include <curl/types.h>
+ #include <curl/easy.h>
+ 
+ #ifndef _rc_reader_h_
