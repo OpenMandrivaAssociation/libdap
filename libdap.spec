@@ -9,7 +9,7 @@
 Name:		libdap
 Summary:	C++ DAP2 library from OPeNDAP
 Version:	3.12.0
-Release:	1
+Release:	2
 # The deflate program is covered by the W3C licence
 License:	LGPLv2.1+
 Group:		System/Libraries
