@@ -6,20 +6,22 @@
 %define libserver %mklibname dapserver %{smajor}
 %define devname %mklibname dap -d
 
-Name:		libdap
 Summary:	C++ DAP2 library from OPeNDAP
-Version:	3.12.0
-Release:	2
+Name:		libdap
+Version:	3.12.1
+Release:	4
 # The deflate program is covered by the W3C licence
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		http://www.opendap.org/
 Source0:	http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
+Patch0:		libdap-3.12.0-tirpc.patch
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 BuildRequires:	groff
 BuildRequires:	pkgconfig(cppunit)
 BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libtirpc)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(uuid)
 
@@ -46,6 +48,7 @@ Group:		System/Libraries
 C++ DAP2 library from OPeNDAP.
 
 %files -n %{libname}
+%defattr(-, root, root)
 %{_libdir}/libdap.so.%{major}*
 
 #----------------------------------------------------------------------------
@@ -59,6 +62,7 @@ Conflicts:	%{_lib}dap10 < 3.12.0
 C++ DAP2 library from OPeNDAP.
 
 %files -n %{libclient}
+%defattr(-, root, root)
 %{_libdir}/libdapclient.so.%{cmajor}*
 
 #----------------------------------------------------------------------------
@@ -72,6 +76,7 @@ Conflicts:	%{_lib}dap10 < 3.12.0
 C++ DAP2 library from OPeNDAP.
 
 %files -n %{libserver}
+%defattr(-, root, root)
 %{_libdir}/libdapserver.so.%{smajor}*
 
 #----------------------------------------------------------------------------
@@ -90,6 +95,7 @@ This package contains all the files needed to develop applications that
 will use libdap.
 
 %files -n %{devname}
+%defattr(-, root, root)
 %{_libdir}/libdap.so
 %{_libdir}/libdapclient.so
 %{_libdir}/libdapserver.so
@@ -117,6 +123,7 @@ Documentation of the libdap library.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 autoreconf -fiv

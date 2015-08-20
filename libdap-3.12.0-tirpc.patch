@@ -1,0 +1,12 @@
+diff -urN libdap-3.12.0/conf/acinclude.m4 libdap-3.12.0-patched/conf/acinclude.m4
+--- libdap-3.12.0/conf/acinclude.m4	2013-09-12 09:22:17.000000000 +1100
++++ libdap-3.12.0-patched/conf/acinclude.m4	2014-08-13 23:30:17.442670595 +1100
+@@ -561,7 +561,7 @@
+     # First, we need to see if the xdr routines are in libc, librpc,
+     # or librpcsvc or libnsl
+     dap_xdrlib=
+-    AC_SEARCH_LIBS([xdr_void],[c rpc nsl rpcsvc],[
++    AC_SEARCH_LIBS([xdr_void],[c rpc nsl rpcsvc tirpc],[
+       dap_xdrlib=`echo $ac_res|sed -e 's/^-l//'`],[
+       AC_MSG_WARN(Cannot locate library containing xdr functions.)])
+     # Added for autoconf 2.59 which appears to not use/set $ac_res. jhrg
