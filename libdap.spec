@@ -13,7 +13,7 @@ Release:	4
 # The deflate program is covered by the W3C licence
 License:	LGPLv2.1+
 Group:		System/Libraries
-Url:		http://www.opendap.org/
+Url:		https://www.opendap.org/
 Source0:	http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
 Patch0:		libdap-3.12.0-tirpc.patch
 BuildRequires:	doxygen
