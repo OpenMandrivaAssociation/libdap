@@ -16,6 +16,11 @@ Group:		System/Libraries
 Url:		https://www.opendap.org/
 Source0:	http://www.opendap.org/pub/source/libdap-%{version}.tar.gz
 Patch0:		libdap-3.12.0-tirpc.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 BuildRequires:	groff
